@@ -47,6 +47,7 @@ def actualizarUsuario(id:int, usuarioActualizado:dict):
 def eliminarUsuario(id: int):
     for usr in usuarios:
         if usr["id"] == id:
-            usuarios.remove(usr)
-            return {"Mensaje": "El usuario ha sido eliminado"}
-        return {"Mensaje": "El usuario no existe"}
+            usuarios.remove(usr)  # Corrección aquí
+            return {"Mensaje": "El usuario se eliminó al llavaso"}
+    
+    raise HTTPException(status_code=400, detail="El usuario no existe")
