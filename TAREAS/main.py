@@ -35,7 +35,7 @@ def obtener_tarea(tarea_id: int):
     for tarea in tareas:
         if tarea['id'] == tarea_id:
             return {"tarea": tarea}
-    raise HTTPException(status_code=404, detail="Esta taera no existe")
+    raise HTTPException(status_code=400, detail="Esta taera no existe")
     
 # endpoint para crear una nueva tarea
 @app.post('/tareas/', tags=['Gestion Tareas'])
@@ -53,5 +53,13 @@ def actualizarTarea(tarea_id: int, tareaActualizada: dict):
         if tarea["id"] == tarea_id:
             tareas[index].update(tareaActualizada)
             return tareas[index]
-    raise HTTPException(status_code=404, detail="Tarea n encontrada")
+    raise HTTPException(status_code=400, detail="Tarea n encontrada")
 
+# endpoint para eliminar una tarea
+@app.delete('/tareas/{tarea_id}', tags=['Gestion Tareas'])
+def eliminar_tarea(tarea_id: int):
+    for tarea in tareas:
+        if tarea["id"] == tarea_id:
+            tareas.remove(tarea)
+            return {"mensaje": "Tarea eliminada chidamente"}
+    raise HTTPException(status_code=400, detail="Tarea no encontrada")
