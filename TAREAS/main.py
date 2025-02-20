@@ -1,14 +1,11 @@
 from fastapi import FastAPI, HTTPException
 from typing import Optional
 
-
 app = FastAPI(
     title='API Repaso S-192',
     description='Creado Por Jelipe',
     version='1.0.1'
 )
-
-
 
 tareas = [
     {"id": 1, "titulo": "Comprar víveres", "descripcion": "Comprar leche y pan", "vencimiento": "15-02-24", "estado": "no completada"},
@@ -63,3 +60,6 @@ def eliminar_tarea(tarea_id: int):
             tareas.remove(tarea)
             return {"mensaje": "Tarea eliminada chidamente"}
     raise HTTPException(status_code=400, detail="Tarea no encontrada")
+
+
+
