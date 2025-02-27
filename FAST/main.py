@@ -1,6 +1,9 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
 from typing import Optional, List
-from models import modeloUsuario
+from modelsPydantic import modeloUsuario, modeloAuth
+from genToken import createToken
+
 
 app = FastAPI(
     title='My FastAPI 192', 
@@ -21,6 +24,16 @@ usuarios=[
 @app.get('/', tags=['Hola Mundo'])
 def home():
     return {'hello': 'world FastAPI'}
+
+# Endpoint Autenticacion
+@app.post('/auth',tags=['Autentificación'])
+def login(autorizacion:modeloAuth):
+    if autorizacion.correo == 'jelipe@example.com' and autorizacion.passw == '123456789':
+        token:str = createToken(autorizacion.model_dump())
+        print(token)
+        return JSONResponse(content=token)
+    else:
+        return{"Aviso": "Usuario no autorizado"}
 
 # Endpoint CONSULTA TODOS
 @app.get('/todoUsuarios', response_model= List[modeloUsuario] ,tags=['Operaciones CRUD'])
