@@ -2,10 +2,9 @@ from pydantic import BaseModel, Field, EmailStr
 
 #modelo de validaciones 
 class modeloUsuario(BaseModel):
-    id:int = Field(...,gt=0,description="Id unico y solo numeros positivos")
-    nombre:str = Field(...,min_lenght=3, max_length=85,description="Solo letras: min 3 max 85")
-    edad:int = Field(...,ge=0,le=120,description="Mayor de 0 y menor de 121")
-    correo: EmailStr = Field(..., description="Debe ser un correo electrónico válido")
+    name:str = Field(...,min_lenght=3, max_length=85,description="Solo letras: min 3 max 85")
+    age:int = Field(...,ge=0,le=120,description="Mayor de 0 y menor de 121")
+    email: EmailStr = Field(..., description="Debe ser un correo electrónico válido")
 
 class modeloAuth(BaseModel):
     correo: EmailStr = Field(..., description="Debe ser un correo electrónico válido", example="example@gmail.com")
