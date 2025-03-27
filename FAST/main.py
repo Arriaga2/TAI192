@@ -96,7 +96,6 @@ def agregarUsuario(usuario:modeloUsuario):
         db.close()
     
 
-
 # Endpoint Actualizar Usuarios
 @app.put('/usuario/{id}',  response_model= modeloUsuario ,tags=['Operaciones CRUD'])
 def actualizarUsuario(id:int, usuarioActualizado:modeloUsuario):
